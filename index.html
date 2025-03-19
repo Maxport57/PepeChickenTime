@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instant Gourmand - Pepe Chicken</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #fff8f0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    #countdown {
+      font-size: 2em;
+      color: #e63946;
+      margin-bottom: 30px;
+    }
+    img {
+      width: 200px;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Temps restant avant l'instant gourmand (Pepe Chicken)</h1>
+  <div id="countdown">Chargement...</div>
+  <img src="pepe_chicken.jpg" alt="Pepe Chicken">
+
+  <script>
+    // Set target date for tomorrow at 12:45
+    const now = new Date();
+    const targetDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 12, 45, 0);
+
+    function updateCountdown() {
+      const currentTime = new Date();
+      const diff = targetDate - currentTime;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "C'est l'instant gourmand !";
+        clearInterval(timer);
+        return;
+      }
+
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    const timer = setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
